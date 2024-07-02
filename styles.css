@@ -50,6 +50,10 @@ button:hover {
   margin-top: 10px;
 }
 
+#compare {
+  margin-top: 10px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
