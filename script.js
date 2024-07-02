@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
     inputGroup.className = "input-group";
     inputGroup.innerHTML = `
             <select>
-                <option value="/tables/dtek/gr1.html">Група 1</option>
-                <option value="/tables/dtek/gr2.html">Група 2</option>
-                <option value="/tables/dtek/gr3.html">Група 3</option>
-                <option value="/tables/dtek/gr4.html">Група 4</option>
-                <option value="/tables/dtek/gr5.html">Група 5</option>
-                <option value="/tables/dtek/gr6.html">Група 6</option>
+                <option value="tables/dtek/gr1.html">Група 1</option>
+                <option value="tables/dtek/gr2.html">Група 2</option>
+                <option value="tables/dtek/gr3.html">Група 3</option>
+                <option value="tables/dtek/gr4.html">Група 4</option>
+                <option value="tables/dtek/gr5.html">Група 5</option>
+                <option value="tables/dtek/gr6.html">Група 6</option>
             </select>
             <button class="remove-btn">-</button>
         `;
