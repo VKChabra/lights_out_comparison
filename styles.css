@@ -82,3 +82,13 @@ footer {
   text-align: center;
   width: 100%;
 }
+
+.cell-scheduled {
+  background-color: black;
+}
+.cell-scheduled-maybe {
+  background-color: gray;
+}
+.cell-non-scheduled {
+  background-color: white;
+}
