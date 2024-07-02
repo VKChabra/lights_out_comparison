@@ -90,5 +90,5 @@ footer {
   background-color: gray;
 }
 .cell-non-scheduled {
-  background-color: white;
+  background-color: #ffd700; /* Darkened yellow */
 }

@@ -72,40 +72,42 @@ document.addEventListener("DOMContentLoaded", function () {
     weekdays.forEach((day, dayIndex) => {
       const resultRow = {
         day: day,
-        offline: [],
-        grayZone: [],
-        online: [],
+        cells: [],
       };
 
-      for (let hour = 0; hour < 24; hour++) {
-        let offlineCount = 0;
-        let grayZoneCount = 0;
-        let onlineCount = 0;
+      for (let hour = 0; hour < 25; hour++) {
+        let cellStatus = {
+          cellScheduled: 0,
+          cellScheduledMaybe: 0,
+          cellNonScheduled: 0,
+        };
 
         tables.forEach(table => {
           const row = table.querySelector(
             `tbody tr:nth-child(${dayIndex + 1})`
           );
           if (row) {
-            const cell = row.querySelector(`td:nth-child(${hour + 3})`); // +3 to skip first two columns (day and empty)
+            const cell = row.querySelector(`td:nth-child(${hour + 2})`); // +2 to skip first two columns (day and empty)
             if (cell) {
               if (cell.classList.contains("cell-scheduled")) {
-                offlineCount++;
+                cellStatus.cellScheduled++;
               } else if (cell.classList.contains("cell-scheduled-maybe")) {
-                grayZoneCount++;
+                cellStatus.cellScheduledMaybe++;
               } else if (cell.classList.contains("cell-non-scheduled")) {
-                onlineCount++;
+                cellStatus.cellNonScheduled++;
               }
             }
           }
         });
 
-        if (offlineCount === tables.length) {
-          resultRow.offline.push(hour);
-        } else if (grayZoneCount === tables.length) {
-          resultRow.grayZone.push(hour);
-        } else if (onlineCount === tables.length) {
-          resultRow.online.push(hour);
+        if (cellStatus.cellScheduled > 0) {
+          resultRow.cells.push("cell-scheduled");
+        } else if (cellStatus.cellScheduledMaybe > 0) {
+          resultRow.cells.push("cell-scheduled-maybe");
+        } else if (cellStatus.cellNonScheduled === tables.length) {
+          resultRow.cells.push("cell-non-scheduled");
+        } else {
+          resultRow.cells.push("");
         }
       }
 
@@ -141,18 +143,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     result => `
                     <tr>
                         <td colspan="2"><div>${result.day}</div></td>
-                        ${Array.from({ length: 24 })
-                          .map((_, hour) => {
-                            if (result.offline.includes(hour)) {
-                              return `<td class="cell-scheduled"></td>`;
-                            } else if (result.grayZone.includes(hour)) {
-                              return `<td class="cell-scheduled-maybe"></td>`;
-                            } else if (result.online.includes(hour)) {
-                              return `<td class="cell-non-scheduled"></td>`;
-                            } else {
-                              return `<td></td>`;
-                            }
-                          })
+                        ${result.cells
+                          .map(cellClass => `<td class="${cellClass}"></td>`)
                           .join("")}
                     </tr>
                 `
