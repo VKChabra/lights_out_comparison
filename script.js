@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cells: [],
       };
 
-      for (let hour = 0; hour < 25; hour++) {
+      for (let hour = 0; hour < 24; hour++) {
         let cellStatus = {
           cellScheduled: 0,
           cellScheduledMaybe: 0,
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `tbody tr:nth-child(${dayIndex + 1})`
           );
           if (row) {
-            const cell = row.querySelector(`td:nth-child(${hour + 2})`); // +2 to skip first two columns (day and empty)
+            const cell = row.querySelector(`td:nth-child(${hour + 2})`); // +2 to skip first column + 1
             if (cell) {
               if (cell.classList.contains("cell-scheduled")) {
                 cellStatus.cellScheduled++;
